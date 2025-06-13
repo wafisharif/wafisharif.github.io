@@ -1,1 +1,85 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Dark physicsy vibe */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0e0f1a;
+  color: #e0e0f1;
+  line-height: 1.6;
+  padding: 2rem;
+}
+
+/* Header styles */
+header {
+  background: linear-gradient(135deg, #0f1c3f, #1a002f);
+  color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(0, 200, 255, 0.2);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #78d9ff;
+  text-shadow: 0 0 10px rgba(120, 217, 255, 0.5);
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #c0bdfb;
+}
+
+/* Main content container */
+.container {
+  max-width: 800px;
+  margin: 3rem auto;
+  background-color: #161824;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(100, 255, 255, 0.1);
+}
+
+/* Section headings */
+h2 {
+  color: #7dd6ff;
+  margin-top: 2rem;
+  border-bottom: 1px solid #3a3f55;
+  padding-bottom: 0.5rem;
+}
+
+/* Lists */
+ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-top: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Links */
+a {
+  color: #ff79c6;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: #8be9fd;
+  text-shadow: 0 0 10px #8be9fd;
+}
+
+/* Contact and footer */
+footer {
+  text-align: center;
+  margin-top: 3rem;
+  color: #999;
+  font-size: 0.9rem;
+}
