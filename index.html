@@ -6,70 +6,41 @@
   <title>Wafi Sharif</title>
   <meta name="description" content="Wafi Sharif. Student in Queens, NY, working on movement analysis, machine learning, and physics education." />
   <meta name="theme-color" content="#060a14" />
-  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
-<body data-route="home">
+<body data-page="home">
   <canvas id="field" aria-hidden="true"></canvas>
 
   <header class="bar">
-    <a class="mark" href="#/">Wafi Sharif</a>
+    <a class="mark" href="/">Wafi Sharif</a>
     <nav class="tabs" aria-label="Sections">
-      <a href="#/" data-link="home">Home</a>
-      <a href="#/projects" data-link="projects">Projects</a>
-      <a href="#/research" data-link="research">Research</a>
-      <a href="#/about" data-link="about">About</a>
-      <a href="#/contact" data-link="contact">Contact</a>
+      <a href="/" data-link="home">Home</a>
+      <a href="/projects/" data-link="projects">Projects</a>
+      <a href="/research/" data-link="research">Research</a>
+      <a href="/about/" data-link="about">About</a>
+      <a href="/contact/" data-link="contact">Contact</a>
     </nav>
   </header>
 
   <main>
-    <section class="panel" id="home" data-panel="home">
+    <section id="home">
       <div class="hero">
         <h1>Wafi Sharif</h1>
         <p id="hero-intro"></p>
         <div class="hero-links">
-          <a href="#/projects">Projects</a>
-          <a href="#/about">About</a>
-          <a href="#/contact">Contact</a>
+          <a href="/projects/">Projects</a>
+          <a href="/about/">About</a>
+          <a href="/contact/">Contact</a>
         </div>
       </div>
     </section>
-
-    <section class="panel page" data-panel="projects" hidden>
-      <h2>Projects</h2>
-      <ul class="projects" id="projects"></ul>
-    </section>
-
-    <section class="panel page" data-panel="research" hidden>
-      <h2>Research</h2>
-      <h3>Labs and programs</h3>
-      <ul class="rows" id="experience"></ul>
-      <h3>Papers</h3>
-      <ul class="rows" id="papers"></ul>
-    </section>
-
-    <section class="panel page" data-panel="about" hidden>
-      <h2>About</h2>
-      <div class="prose" id="about-text"></div>
-      <h3>Right now</h3>
-      <ul class="plain" id="now-list"></ul>
-      <h3>Tools</h3>
-      <dl class="tools" id="tools"></dl>
-    </section>
-
-    <section class="panel page" data-panel="contact" hidden>
-      <h2>Contact</h2>
-      <p class="lead">Email is the best way to reach me.</p>
-      <p><a class="email" id="email"></a></p>
-      <ul class="rows links" id="links"></ul>
-    </section>
   </main>
 
-  <script src="data.js"></script>
-  <script src="main.js"></script>
+  <script src="/data.js"></script>
+  <script src="/main.js"></script>
 </body>
 </html>

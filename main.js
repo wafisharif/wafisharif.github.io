@@ -2,7 +2,8 @@
   Wafi Sharif, portfolio
   - Field: the dotted walker on the home page. Moving the cursor leaves a
     small ripple, and clicking the walker gives it a light push.
-  - Router: hash-based tabs (#/projects, #/about, ...).
+  - Each tab is its own page (/projects/, /about/, ...). This file fills
+    in whichever page it's loaded on.
   All text lives in data.js.
 */
 (() => {
@@ -62,7 +63,8 @@
   }
 
   /* ---------- the field ---------- */
-  const Field = (() => {
+  // Only the home page has the canvas.
+  const Field = !$("#field") ? null : (() => {
     const canvas = $("#field");
     const ctx = canvas.getContext("2d");
     const off = document.createElement("canvas");
@@ -347,35 +349,25 @@
       });
   }
 
-  /* ---------- router ---------- */
-  const ROUTES = ["home", "projects", "research", "about", "contact"];
-
-  function route() {
-    const [r0, sub] = location.hash.replace(/^#\/?/, "").split("/");
-    const r = ROUTES.includes(r0) ? r0 : "home";
-    $$(".panel").forEach((p) => (p.hidden = p.dataset.panel !== r));
-    $$(".tabs a").forEach((a) => (a.dataset.link === r ? a.setAttribute("aria-current", "page") : a.removeAttribute("aria-current")));
-    document.body.dataset.route = r;
-    document.title = r === "home" ? "Wafi Sharif" : `${r[0].toUpperCase() + r.slice(1)} | Wafi Sharif`;
-    Field.setVisible(r === "home");
-    window.scrollTo(0, 0);
-
-    if (r === "projects" && sub) {
-      const d = document.getElementById(`p-${sub}`);
-      if (d) {
-        d.open = true;
-        d.scrollIntoView({ block: "start" });
-        window.scrollBy(0, -100);
-      }
-    }
+  /* ---------- page setup ---------- */
+  // Old links like /#/projects still work: send them to the real page.
+  const old = location.hash.match(/^#\/(projects|research|about|contact)/);
+  if (old) {
+    location.replace(`/${old[1]}/`);
+    return;
   }
 
-  $("#hero-intro").textContent = SITE.intro;
-  renderProjects();
-  renderResearch();
-  renderAbout();
-  renderContact();
-  Field.init();
-  route();
-  window.addEventListener("hashchange", route);
+  const page = document.body.dataset.page;
+  $$(".tabs a").forEach((a) => {
+    if (a.dataset.link === page) a.setAttribute("aria-current", "page");
+  });
+
+  if (page === "home") {
+    $("#hero-intro").textContent = SITE.intro;
+    Field.init();
+  }
+  if (page === "projects") renderProjects();
+  if (page === "research") renderResearch();
+  if (page === "about") renderAbout();
+  if (page === "contact") renderContact();
 })();

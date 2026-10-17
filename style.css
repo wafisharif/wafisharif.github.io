@@ -42,9 +42,6 @@ a {
   transition: opacity 0.4s;
 }
 
-body:not([data-route="home"]) #field {
-  opacity: 0;
-}
 
 /* top bar */
 
@@ -89,10 +86,6 @@ body:not([data-route="home"]) #field {
 main {
   position: relative;
   z-index: 1;
-}
-
-.panel[hidden] {
-  display: none;
 }
 
 /* home */
@@ -152,18 +145,23 @@ main {
   padding: 120px var(--gutter) 80px;
 }
 
-.page h2 {
+.page-title {
   margin: 0 0 32px;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -0.02em;
 }
 
-.page h3 {
+.page h2 {
   margin: 48px 0 12px;
   font-size: 14px;
   font-weight: 500;
   color: var(--muted);
+}
+
+a.inline,
+.lead a {
+  color: var(--accent);
 }
 
 .lead {
