@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wafi Sharif</title>
+  <meta name="description" content="Wafi Sharif. Student in Queens, NY, working on movement analysis, machine learning, and physics education." />
+  <meta name="theme-color" content="#050913" />
+  <meta property="og:title" content="Wafi Sharif" />
+  <meta property="og:description" content="Movement analysis, machine learning, and physics education." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-route="home">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="bar">
+    <a class="mark" href="#/" data-link="home" aria-label="Wafi Sharif, home">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+        <circle cx="16" cy="6" r="3.2" />
+        <path d="M16 10 L16 18 M16 18 L11 27 M16 18 L21.5 26 M16 12.5 L10.5 17 M16 12.5 L22 15.5" />
+      </svg>
+      <span>Wafi Sharif</span>
+    </a>
+
+    <nav class="tabs" aria-label="Sections">
+      <a href="#/" data-link="home">Home</a>
+      <a href="#/projects" data-link="projects">Projects</a>
+      <a href="#/research" data-link="research">Research</a>
+      <a href="#/about" data-link="about">About</a>
+      <a href="#/contact" data-link="contact">Contact</a>
+      <span class="tabs-pill" aria-hidden="true"></span>
+    </nav>
+
+    <div class="bar-right">
+      <span class="clock" id="clock" title="Local time in New York"></span>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HOME -->
+    <section class="panel" id="home" data-panel="home" aria-label="Home">
+      <div class="hero-controls">
+        <div class="seg" role="group" aria-label="Render style">
+          <button type="button" data-mode="dots" aria-pressed="true">Dots</button>
+          <button type="button" data-mode="type" aria-pressed="false">Type</button>
+        </div>
+      </div>
+
+      <div class="hud" id="hud" aria-hidden="true">
+        <div class="hud-row"><span>hip</span><b id="hud-hip">0.0°</b></div>
+        <div class="hud-row"><span>knee</span><b id="hud-knee">0.0°</b></div>
+        <div class="hud-row"><span>trunk</span><b id="hud-trunk">0.0°</b></div>
+        <div class="hud-row"><span>cadence</span><b id="hud-cad">0</b></div>
+        <div class="hud-status" id="hud-status">steady</div>
+      </div>
+
+      <div class="hero-text">
+        <h1 class="hero-name">Wafi Sharif</h1>
+        <p class="hero-intro" id="hero-intro"></p>
+        <div class="hero-actions">
+          <a class="btn btn-solid" href="#/projects">See projects</a>
+          <a class="btn" href="#/about">About me</a>
+        </div>
+      </div>
+
+      <p class="hero-hint" id="hero-hint">Move your cursor to make ripples. Click the walker to give it a push.</p>
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="panel page" id="projects" data-panel="projects" aria-labelledby="projects-title" hidden>
+      <div class="page-inner">
+        <header class="page-head">
+          <h2 id="projects-title">Projects</h2>
+          <p>Apps, research, and things I built to understand something better. Pick one to see what it's about.</p>
+        </header>
+
+        <div class="filters" role="group" aria-label="Filter projects" id="filters"></div>
+
+        <div class="proj">
+          <ul class="proj-list" id="proj-list"></ul>
+          <article class="proj-view" id="proj-view" aria-live="polite">
+            <div class="proj-canvas-wrap">
+              <canvas id="proj-canvas" aria-hidden="true"></canvas>
+              <span class="proj-canvas-tag" id="proj-tag"></span>
+            </div>
+            <div class="proj-body">
+              <div class="proj-meta" id="proj-meta"></div>
+              <h3 id="proj-title"></h3>
+              <div id="proj-text"></div>
+              <ul class="chips" id="proj-stack"></ul>
+              <div class="proj-links" id="proj-links"></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESEARCH -->
+    <section class="panel page" id="research" data-panel="research" aria-labelledby="research-title" hidden>
+      <div class="page-inner">
+        <header class="page-head">
+          <h2 id="research-title">Research</h2>
+          <p>Where I've worked and what came out of it.</p>
+        </header>
+
+        <div class="research-grid">
+          <div>
+            <h3 class="sub">Labs and programs</h3>
+            <ol class="timeline" id="timeline"></ol>
+          </div>
+          <div>
+            <h3 class="sub">Writing</h3>
+            <ul class="papers" id="papers"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="panel page" id="about" data-panel="about" aria-labelledby="about-title" hidden>
+      <div class="page-inner">
+        <header class="page-head">
+          <h2 id="about-title">About</h2>
+        </header>
+
+        <div class="about-grid">
+          <div class="about-text" id="about-text"></div>
+          <aside class="now">
+            <h3 class="sub">Right now</h3>
+            <ul id="now-list"></ul>
+          </aside>
+        </div>
+
+        <h3 class="sub tools-title">Things I use</h3>
+        <dl class="tools" id="tools"></dl>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="panel page" id="contact" data-panel="contact" aria-labelledby="contact-title" hidden>
+      <div class="page-inner">
+        <header class="page-head">
+          <h2 id="contact-title">Contact</h2>
+          <p>The best way to reach me is email. I'm happy to talk about research, Kinetra, or physics.</p>
+        </header>
+
+        <div class="contact-grid">
+          <div>
+            <button class="email" id="email-btn" type="button">
+              <span id="email-text"></span>
+              <small id="email-note">Click to copy</small>
+            </button>
+            <ul class="link-list" id="link-list"></ul>
+          </div>
+
+          <div class="term" id="term">
+            <div class="term-top" aria-hidden="true"><i></i><i></i><i></i><span>terminal</span></div>
+            <div class="term-out" id="term-out" role="log" aria-live="polite"></div>
+            <form class="term-line" id="term-form" autocomplete="off">
+              <label for="term-in" class="prompt">wafi@portfolio:~$</label>
+              <input id="term-in" type="text" spellcheck="false" autocapitalize="off" aria-label="Terminal command" />
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>&copy; <span id="year"></span> Wafi Sharif</span>
+    <span class="foot-keys">Press 1 to 5 to switch tabs</span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
