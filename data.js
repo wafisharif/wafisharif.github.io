@@ -21,10 +21,6 @@ const SITE = {
   ],
 };
 
-/*
-  visual: which little animation shows in the project viewer.
-  Options: pose, gait, polar, battery, rbm, storm, pendulum, mri
-*/
 const PROJECTS = [
   {
     id: "kinetra",
@@ -32,7 +28,6 @@ const PROJECTS = [
     kind: "App",
     status: "In TestFlight",
     year: "2026",
-    visual: "pose",
     summary: "A phone app that scores how you move from a short video.",
     body: [
       "Kinetra takes a video from your phone camera, runs pose estimation on it, and gives back joint angles, rep counts, and scores for smoothness, symmetry, and control. There are separate modes for sit-to-stand, reaching, arm raises, walking, balance, and the timed up-and-go test that physical therapists use a lot.",
@@ -48,7 +43,6 @@ const PROJECTS = [
     kind: "Research",
     status: "In progress",
     year: "2026",
-    visual: "gait",
     summary: "Simulated walkers with gait impairments, then pushed to see who falls.",
     body: [
       "I'm building walking controllers in MuJoCo and MyoSuite for five groups: healthy adults and people with Parkinson's, Huntington's, ALS, and stroke. Each one is matched against real patient gait data from public datasets like GaitNDD and GaitPDB. Then I apply perturbations and compare how stable each controller stays.",
@@ -66,7 +60,6 @@ const PROJECTS = [
     kind: "Lab",
     status: "Summer 2026",
     year: "2026",
-    visual: "polar",
     summary: "A precision rotation mount and a polarization setup rebuilt from parts.",
     body: [
       "I spent the summer at the Delor Lab at Columbia, which does ultrafast optical imaging. My first job was putting a set of disassembled polarization optics back together, which meant figuring out which piece was a polarizer and which was a half-wave plate by checking transmitted intensity against Malus's law.",
@@ -82,7 +75,6 @@ const PROJECTS = [
     kind: "Research",
     status: "Paper submitted",
     year: "",
-    visual: "battery",
     summary: "How a lithium-substituted binder changes resistance inside a graphite anode.",
     body: [
       "At NYU Tandon, through the ARISE program, I worked in Andre Taylor's lab on the binder that holds a graphite anode together. I studied how moving toward a lithium-substituted version of CMC, a more sustainable binder, changes the charge transfer resistance at the electrode interface.",
@@ -97,7 +89,6 @@ const PROJECTS = [
     kind: "ML",
     status: "In progress",
     year: "2026",
-    visual: "rbm",
     summary: "Teaching an energy-based model library to learn from sequences.",
     body: [
       "Learnergy is an open-source library for energy-based models. I'm adding a recurrent temporal restricted Boltzmann machine (RTRBM) and a stacked version of it (RTDBN), so the library can learn from sequences instead of single snapshots.",
@@ -112,7 +103,6 @@ const PROJECTS = [
     kind: "ML",
     status: "Hackathon",
     year: "2026",
-    visual: "storm",
     summary: "Forecasting upper-atmosphere density during big geomagnetic storms.",
     body: [
       "StormSurge is a physics-constrained machine learning model for thermospheric density during extreme geomagnetic storms. Density up there decides how much drag satellites feel, and it jumps during storms, which is exactly when it's hardest to predict.",
@@ -127,7 +117,6 @@ const PROJECTS = [
     kind: "Physics",
     status: "Live",
     year: "",
-    visual: "pendulum",
     summary: "An AP Physics 1 site with interactive simulators, plus animated explainers.",
     body: [
       "Studio Physics started as a study guide for AP Physics 1 and turned into a full site: seven unit pages and a set of interactive simulators built with p5.js, all sharing one dark visual style.",
@@ -145,7 +134,6 @@ const PROJECTS = [
     kind: "ML",
     status: "In progress",
     year: "2026",
-    visual: "mri",
     summary: "A Kaggle entry for spotting abnormalities in knee MRI scans.",
     body: [
       "I'm competing in the RSNA knee abnormality detection challenge on Kaggle, training models on knee MRI scans with Kaggle's notebook GPUs.",
