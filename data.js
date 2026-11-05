@@ -6,8 +6,7 @@
 const SITE = {
   name: "Wafi Sharif",
   firstName: "Wafi",
-  intro:
-    "Student in Queens, NY, working on movement analysis, machine learning, and physics education.",
+  intro: "Student in Queens, NY. Interested in biomechanics, computation, and engineering.",
   email: "wafi@kinetraapp.com",
   github: "https://github.com/wafisharif",
   githubHandle: "wafisharif",
@@ -38,77 +37,18 @@ const PROJECTS = [
     links: [{ label: "kinetraapp.com", url: "https://kinetraapp.com" }],
   },
   {
-    id: "gait",
-    title: "Pathological gait stability",
-    kind: "Research",
-    status: "In progress",
-    year: "2026",
-    summary: "Simulated walkers with gait impairments, then pushed to see who falls.",
-    body: [
-      "I'm building walking controllers in MuJoCo and MyoSuite for five groups: healthy adults and people with Parkinson's, Huntington's, ALS, and stroke. Each one is matched against real patient gait data from public datasets like GaitNDD and GaitPDB. Then I apply perturbations and compare how stable each controller stays.",
-      "In a related study, I compared four walking policies on MyoSuite's leg model against real stroke motion capture data. The policy trained to imitate stroke gait developed a stiff-knee pattern on its own, with almost no knee bend on the affected side. That's a real clinical signature, and nothing in the training asked for it.",
-      "I'm doing this with Miles Smith at MIT.",
-    ],
-    stack: ["Python", "MuJoCo", "MyoSuite", "Reinforcement learning"],
-    links: [
-      { label: "GitHub", url: "https://github.com/wafisharif/pathological-gait-stability" },
-    ],
-  },
-  {
-    id: "delor",
-    title: "Polarization optics at Columbia",
-    kind: "Lab",
-    status: "Summer 2026",
-    year: "2026",
-    summary: "A precision rotation mount and a polarization setup rebuilt from parts.",
-    body: [
-      "I spent the summer at the Delor Lab at Columbia, which does ultrafast optical imaging. My first job was putting a set of disassembled polarization optics back together, which meant figuring out which piece was a polarizer and which was a half-wave plate by checking transmitted intensity against Malus's law.",
-      "The main project was designing a rotation mount for angle-resolved measurements on anisotropic materials, to be tested on the kind of material behind the lab's work on hyperbolic chiral polaritons. I also worked on a modular iSCAT microscope and a 3D-printed sample stage designed to stay very still.",
-      "My mentor was Agata Azzolini.",
-    ],
-    stack: ["Polarization optics", "iSCAT", "CAD", "3D printing"],
-    links: [],
-  },
-  {
-    id: "battery",
-    title: "Battery binder chemistry",
-    kind: "Research",
-    status: "Paper submitted",
-    year: "",
-    summary: "How a lithium-substituted binder changes resistance inside a graphite anode.",
-    body: [
-      "At NYU Tandon, through the ARISE program, I worked in Andre Taylor's lab on the binder that holds a graphite anode together. I studied how moving toward a lithium-substituted version of CMC, a more sustainable binder, changes the charge transfer resistance at the electrode interface.",
-      "The paper is submitted to Royal Society Open Science, and the raw data is public on Zenodo.",
-    ],
-    stack: ["Electrochemistry", "Impedance spectroscopy", "Data analysis"],
-    links: [{ label: "Data on Zenodo", url: "https://doi.org/10.5281/zenodo.21210104" }],
-  },
-  {
     id: "rtrbm",
     title: "Temporal RBMs for Learnergy",
     kind: "ML",
     status: "In progress",
     year: "2026",
-    summary: "Teaching an energy-based model library to learn from sequences.",
+    summary: "Adding sequence models to an energy-based learning library, for use in SIT-FUSE.",
     body: [
-      "Learnergy is an open-source library for energy-based models. I'm adding a recurrent temporal restricted Boltzmann machine (RTRBM) and a stacked version of it (RTDBN), so the library can learn from sequences instead of single snapshots.",
-      "I've been testing it on biomechanical movement data. The plan is to plug it into SIT-FUSE, a framework at Spatial Informatics Group, where I'm working with Nick LaHaye.",
+      "Learnergy is an open-source Python library for energy-based models like restricted Boltzmann machines. I'm adding a recurrent temporal RBM (RTRBM) and a stacked version of it (RTDBN), so the library can learn from data that changes over time instead of treating each sample on its own.",
+      "These models are meant to be used in SIT-FUSE, a self-supervised framework from NASA JPL for finding and tracking things like wildfire smoke, dust plumes, and harmful algal blooms in satellite and airborne imagery. SIT-FUSE is designed to work when there are few or no labels, and it follows objects across scenes over time. A model that learns how a scene changes from one frame to the next fits that kind of tracking well.",
+      "I've also been testing the models on biomechanical movement data. I'm working on this with Nick LaHaye at Spatial Informatics Group.",
     ],
     stack: ["Python", "PyTorch", "Energy-based models"],
-    links: [],
-  },
-  {
-    id: "stormsurge",
-    title: "StormSurge",
-    kind: "ML",
-    status: "Hackathon",
-    year: "2026",
-    summary: "Forecasting upper-atmosphere density during big geomagnetic storms.",
-    body: [
-      "StormSurge is a physics-constrained machine learning model for thermospheric density during extreme geomagnetic storms. Density up there decides how much drag satellites feel, and it jumps during storms, which is exactly when it's hardest to predict.",
-      "I built it for the NASA and Hack Club Stardance challenge.",
-    ],
-    stack: ["Python", "Machine learning", "Space weather data"],
     links: [],
   },
   {
@@ -128,84 +68,13 @@ const PROJECTS = [
       { label: "Instagram", url: "https://instagram.com/studiophysics" },
     ],
   },
-  {
-    id: "rsna",
-    title: "Knee MRI abnormality detection",
-    kind: "ML",
-    status: "In progress",
-    year: "2026",
-    summary: "A Kaggle entry for spotting abnormalities in knee MRI scans.",
-    body: [
-      "I'm competing in the RSNA knee abnormality detection challenge on Kaggle, training models on knee MRI scans with Kaggle's notebook GPUs.",
-      "It's still early. I'll put results here once there's something worth showing.",
-    ],
-    stack: ["Python", "PyTorch", "Medical imaging", "Kaggle"],
-    links: [],
-  },
-];
-
-const EXPERIENCE = [
-  {
-    where: "Columbia University, Delor Lab",
-    what: "Summer research intern in ultrafast optical imaging. Polarization optics, a rotation mount for anisotropic samples, and iSCAT.",
-    when: "Summer 2026",
-    project: "delor",
-  },
-  {
-    where: "MIT, with Miles Smith",
-    what: "Research on musculoskeletal walking simulations and how stable impaired gaits are under perturbation.",
-    when: "2026",
-    project: "gait",
-  },
-  {
-    where: "Spatial Informatics Group, with Nick LaHaye",
-    what: "Adding temporal RBMs to the Learnergy library for use in the SIT-FUSE framework.",
-    when: "2026",
-    project: "rtrbm",
-  },
-  {
-    where: "NYU Tandon, ARISE",
-    what: "Battery materials research in Andre Taylor's lab on binder chemistry for graphite anodes.",
-    when: "",
-    project: "battery",
-  },
-  {
-    where: "NASA and Hack Club Stardance",
-    what: "Built StormSurge, a physics-constrained model for thermospheric density during geomagnetic storms.",
-    when: "",
-    project: "stormsurge",
-  },
-];
-
-const PAPERS = [
-  {
-    title:
-      "Modulating Interfacial Charge Transfer Resistance in Graphite Anodes through Sustainable Binder Chemistry: Toward Li-Substituted CMC Design",
-    note: "Submitted to Royal Society Open Science",
-    url: "https://doi.org/10.5281/zenodo.21210104",
-    urlLabel: "Dataset",
-  },
-  {
-    title:
-      "Validating Musculoskeletal Locomotion Policies Against Real Gait Data: Reward-Design Trade-offs and an Emergent Stiff-Knee Gait Signature",
-    note: "Manuscript, with Miles Smith",
-    url: "",
-    urlLabel: "",
-  },
 ];
 
 const ABOUT = {
   paragraphs: [
-    "I'm Wafi, a student at Queens High School for the Sciences in Jamaica, Queens.",
-    "A lot of what I work on comes back to one question: how do you measure the way a body moves, and what can you actually learn from it? That's where Kinetra came from, and the gait simulations, and the temporal models I'm building for movement data.",
-    "The rest of the time I'm usually doing physics you can see. That's why I started Studio Physics, and how I ended up in an optics lab at Columbia this summer after doing battery chemistry at NYU before that. I'm also working through Gilbert Strang's linear algebra course on my own.",
-  ],
-  now: [
-    "Getting Kinetra from TestFlight onto the App Store",
-    "Running perturbation experiments for the gait project",
-    "Training models for the RSNA knee MRI challenge",
-    "Making new Manim reels for Studio Physics",
-    "MIT 18.06, one lecture at a time",
+    "I'm Wafi, a high school student at Queens High School for the Sciences in Jamaica, Queens.",
+    "I'm most interested in how the body moves and how you can measure and model that movement. That pulls me toward biomechanics, and toward the math and programming that make it possible to study. I like engineering and physics more broadly too, especially when I can build something and watch an idea actually work.",
+    "I spend a lot of my free time teaching myself new things. Lately that's been linear algebra, through Gilbert Strang's lectures from MIT. I also like reading about how startups and markets work.",
   ],
   tools: [
     { group: "Languages", items: ["Python", "TypeScript", "JavaScript", "HTML and CSS"] },

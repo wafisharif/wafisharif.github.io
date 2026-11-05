@@ -62,8 +62,9 @@
     return { L, hip, shoulder, neckTop, headC, legs: legPts, arms };
   }
 
-  /* ---------- the field ---------- */
-  // Only the home page has the canvas.
+  /* ---------- the walker panel ---------- */
+  // Only the home page has the canvas. Everything here is in the canvas's
+  // own pixel space, not the window's.
   const Field = !$("#field") ? null : (() => {
     const canvas = $("#field");
     const ctx = canvas.getContext("2d");
@@ -82,13 +83,13 @@
 
     function resize() {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      W = window.innerWidth;
-      H = window.innerHeight;
+      const r = canvas.getBoundingClientRect();
+      W = Math.max(1, Math.round(r.width));
+      H = Math.max(1, Math.round(r.height));
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const narrow = W < 640;
-      cell = narrow ? 6 : 7;
+      cell = W < 420 ? 4 : 5;
       cols = Math.ceil(W / cell) + 2;
       rows = Math.ceil(H / cell) + 2;
       cur = new Float32Array(cols * rows);
@@ -96,8 +97,8 @@
       off.width = cols;
       off.height = rows;
       walker.cx = cols * 0.5;
-      walker.ground = rows * (narrow ? 0.56 : 0.62);
-      walker.size = narrow ? Math.min(rows * 0.3, cols * 0.7) : Math.min(rows * 0.4, cols * 0.5);
+      walker.ground = rows * 0.86;
+      walker.size = Math.min(rows * 0.7, cols * 0.75);
     }
 
     function disturb(gx, gy, amp, radius) {
@@ -240,9 +241,26 @@
       if (v) start();
     }
 
+    // Pointer position relative to the canvas, or null when outside it.
+    function local(e) {
+      const r = canvas.getBoundingClientRect();
+      const x = e.clientX - r.left, y = e.clientY - r.top;
+      return x >= 0 && y >= 0 && x <= r.width && y <= r.height ? { x, y } : null;
+    }
+
+    function overWalker(p) {
+      const b = walker.box;
+      return p && b && p.x > b.x0 && p.x < b.x1 && p.y > b.y0 && p.y < b.y1;
+    }
+
     function onMove(e) {
-      if (!visible) return;
-      const gx = e.clientX / cell + 0.5, gy = e.clientY / cell + 0.5;
+      const p = local(e);
+      if (!p) {
+        ptr.gx = ptr.gy = -1;
+        canvas.style.cursor = "";
+        return;
+      }
+      const gx = p.x / cell + 0.5, gy = p.y / cell + 0.5;
       if (ptr.gx >= 0) {
         const d = Math.hypot(gx - ptr.gx, gy - ptr.gy);
         if (d > 0.5 && d < 60) {
@@ -256,27 +274,29 @@
       }
       ptr.gx = gx;
       ptr.gy = gy;
-      const b = walker.box;
-      const over = b && e.clientX > b.x0 && e.clientX < b.x1 && e.clientY > b.y0 && e.clientY < b.y1;
-      document.documentElement.style.cursor = over ? "pointer" : "";
+      canvas.style.cursor = overWalker(p) ? "pointer" : "";
     }
 
     function onDown(e) {
-      if (!visible || e.target.closest("a, button")) return;
-      const b = walker.box;
-      if (b && e.clientX > b.x0 && e.clientX < b.x1 && e.clientY > b.y0 && e.clientY < b.y1) {
+      const p = local(e);
+      if (overWalker(p)) {
         const hipX = (walker.cx - 1) * cell;
-        walker.leanV += (e.clientX < hipX ? 1 : -1) * 1.8;
+        walker.leanV += (p.x < hipX ? 1 : -1) * 1.8;
       }
     }
 
     function init() {
       resize();
       update(0);
-      window.addEventListener("resize", resize);
+      if ("ResizeObserver" in window) new ResizeObserver(resize).observe(canvas);
+      else window.addEventListener("resize", resize);
       window.addEventListener("pointermove", onMove, { passive: true });
-      window.addEventListener("pointerdown", onDown);
+      canvas.addEventListener("pointerdown", onDown);
       document.addEventListener("visibilitychange", start);
+      // Pause the animation while the panel is scrolled out of view.
+      if ("IntersectionObserver" in window) {
+        new IntersectionObserver(([en]) => setVisible(en.isIntersecting)).observe(canvas);
+      }
       start();
     }
 
@@ -311,27 +331,8 @@
     }
   }
 
-  function renderResearch() {
-    const ex = $("#experience");
-    for (const e of EXPERIENCE) {
-      ex.append(
-        el("li", {},
-          el("div", { className: "row-head" }, el("b", { textContent: e.where }), e.when ? el("span", { textContent: e.when }) : null),
-          el("p", { textContent: e.what })
-        )
-      );
-    }
-    const pl = $("#papers");
-    for (const p of PAPERS) {
-      const li = el("li", {}, el("div", { className: "row-head" }, el("b", { textContent: p.title })), el("p", { textContent: p.note }));
-      if (p.url) li.append(el("p", {}, ext(p.urlLabel || "Link", p.url)));
-      pl.append(li);
-    }
-  }
-
   function renderAbout() {
     ABOUT.paragraphs.forEach((t) => $("#about-text").append(el("p", { textContent: t })));
-    ABOUT.now.forEach((t) => $("#now-list").append(el("li", { textContent: t })));
     ABOUT.tools.forEach((g) =>
       $("#tools").append(el("div", {}, el("dt", { textContent: g.group }), el("dd", { textContent: g.items.join(", ") })))
     );
@@ -351,7 +352,7 @@
 
   /* ---------- page setup ---------- */
   // Old links like /#/projects still work: send them to the real page.
-  const old = location.hash.match(/^#\/(projects|research|about|contact)/);
+  const old = location.hash.match(/^#\/(projects|about|contact)/);
   if (old) {
     location.replace(`/${old[1]}/`);
     return;
@@ -367,7 +368,6 @@
     Field.init();
   }
   if (page === "projects") renderProjects();
-  if (page === "research") renderResearch();
   if (page === "about") renderAbout();
   if (page === "contact") renderContact();
 })();

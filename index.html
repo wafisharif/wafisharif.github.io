@@ -4,31 +4,27 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Wafi Sharif</title>
-  <meta name="description" content="Wafi Sharif. Student in Queens, NY, working on movement analysis, machine learning, and physics education." />
+  <meta name="description" content="Wafi Sharif. Student in Queens, NY. Interested in biomechanics, computation, and engineering." />
   <meta name="theme-color" content="#060a14" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/style.css" />
 </head>
 <body data-page="home">
-  <canvas id="field" aria-hidden="true"></canvas>
-
   <header class="bar">
     <a class="mark" href="/">Wafi Sharif</a>
     <nav class="tabs" aria-label="Sections">
       <a href="/" data-link="home">Home</a>
       <a href="/projects/" data-link="projects">Projects</a>
-      <a href="/research/" data-link="research">Research</a>
       <a href="/about/" data-link="about">About</a>
       <a href="/contact/" data-link="contact">Contact</a>
     </nav>
   </header>
 
-  <main>
-    <section id="home">
-      <div class="hero">
+  <main class="home">
+    <section class="hero">
+      <div class="hero-copy">
         <h1>Wafi Sharif</h1>
         <p id="hero-intro"></p>
         <div class="hero-links">
@@ -37,6 +33,24 @@
           <a href="/contact/">Contact</a>
         </div>
       </div>
+
+      <figure class="walker-panel">
+        <figcaption>Move your cursor over the panel, or click the walker.</figcaption>
+        <div class="walker-stage">
+          <canvas id="field" aria-label="Animated walking figure made of dots"></canvas>
+        </div>
+      </figure>
+    </section>
+
+    <!--
+      Photo slots. To add a photo, put the image in a /photos folder and
+      place it inside a slot, like this:
+      <div class="photo-slot"><img src="/photos/1.jpg" alt="Describe the photo" /></div>
+    -->
+    <section class="photos" aria-label="Photos">
+      <div class="photo-slot"></div>
+      <div class="photo-slot"></div>
+      <div class="photo-slot"></div>
     </section>
   </main>
 
